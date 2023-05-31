@@ -2,12 +2,14 @@ import csv
 import threading
 from collections import defaultdict
 
+#define the class MapReduceThread which is performing the mapreduce operation within a thread
 class MapReduceThread(threading.Thread):
     def __init__(self, data, results):
         super(MapReduceThread, self).__init__()
         self.data = data
         self.results = results
 
+    # execution logic of the thread
     def run(self):
         passenger_counts = defaultdict(int)
         for row in self.data:
@@ -26,8 +28,8 @@ def flight_counts(file_path, num_threads):
     block_size = len(data) // num_threads
 
     # create list
-    threads = []
-    results = []
+    threads = []    #thread object
+    results = []    #thread result
 
     # divide the dataset and allocate to each thread
     for i in range(num_threads):
